@@ -21,7 +21,7 @@ https://daily-pinniped-fact.aquaticdle.com/
 
 
 ## Overview
-**Containerized API**: The Flask backend is containerized using Docker and deployed to Google Cloud Run. The container is stateless but initializes and seeds a local SQLite database on startup.
+**Containerized API**: The Flask backend is containerized using Docker and deployed to Google Cloud Run. The container is stateless but initializes and seeds a local SQLite database on startup. It has one endpoint, GET /api/fact/random, which returns a fact, an image url, and the fact's id. 
 
 **Frontend Hosting**: The frontend is hosted on a GCP Compute Engine virtual machine. 
 
