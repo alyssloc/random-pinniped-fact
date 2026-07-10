@@ -1,0 +1,11 @@
+variable "gcp_project_id" {
+  type        = string
+  description = "The unique ID of your Google Cloud Platform project"
+  default     = "your-gcp-project-id" 
+}
+
+variable "gcp_region" {
+  type        = string
+  description = "The target data center region for deployment"
+  default     = "us-central1"
+}

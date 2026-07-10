@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Seal Fact</title>
+</head>
+<body>
+    <h1>Seal Fact of the Day</h1>
+    <p id="fact">Loading fact...</p>
+    <img id="seal-image" src="" alt="Seal Image" style="max-width:500px; display:none;">
+
+    <script>
+        const API_URL = "/api/fact/random";
+
+        fetch(API_URL)
+            .then(res => res.json())
+            .then(response => {
+                if(response.status === "success") {
+                    document.getElementById('fact').innerText = response.data.fact;
+                    const img = document.getElementById('seal-image');
+                    img.src = response.data.image_url;
+                    img.style.display = "block";
+                }
+            })
+            .catch(err => {
+                document.getElementById('fact').innerText = "Failed to load seal fact.";
+                console.error(err);
+            });
+    </script>
+</body>
+</html>
