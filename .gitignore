@@ -2,3 +2,12 @@
 __pycache__/
 .vscode/
 instance/
+.env*
+
+**/.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfvars.json
+crash.log

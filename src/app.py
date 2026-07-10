@@ -20,6 +20,10 @@ class PinnipedFact(db.Model):
    fact_text = db.Column(db.String(500), nullable=False)
    image_url = db.Column(db.String(200), nullable=False)
 
+   def __init__(self, fact_text, image_url):
+       self.fact_text = fact_text
+       self.image_url = image_url
+
    def to_dict(self):
       return {
             "id": self.id,
@@ -51,9 +55,38 @@ def random_fact():
 @app.cli.command("init-db")
 def init_db():
     db.create_all()
+   
+@app.cli.command("seed-db")
+def seed_db_command():
+    seed_db()
+
+def seed_db():
+    db.create_all()
+    seed_path = os.path.join(BASE_DIR, 'static', 'seed.json')
+
+    if not os.path.exists(seed_path):
+        print(f"Seed file not found at {seed_path}")
+        return
+    
+    with open(seed_path, 'r', encoding='utf-8') as f:
+        facts_list = json.load(f)
+        
+    for item in facts_list:
+        json_fact_text = item['fact_text']
+        json_image_url = item['image_url']
+        
+        exists = PinnipedFact.query.filter_by(fact_text=json_fact_text).first()
+        if not exists:
+            new_fact = PinnipedFact(
+                fact_text=json_fact_text, 
+                image_url=json_image_url
+            )
+            db.session.add(new_fact)
+            
+    db.session.commit()
+
+with app.app_context():
+    seed_db()
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-
     app.run(debug=True, port=5000)
