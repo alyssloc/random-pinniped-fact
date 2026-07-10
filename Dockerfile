@@ -21,7 +21,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 #6- data directory
-RUN mkdir -p /src/instance/pinniped_facts
+RUN mkdir -p /src/src/instance/pinniped_facts
 
 #7- creating user to run the app
 RUN useradd -m appuser
@@ -29,5 +29,5 @@ RUN chown -R appuser:appuser /src
 USER appuser
 
 #8- running application
-CMD exec gunicorn --bind 0.0.0.0:$PORT "app:app"
+CMD exec gunicorn --chdir src --bind 0.0.0.0:$PORT "app:app"
 
