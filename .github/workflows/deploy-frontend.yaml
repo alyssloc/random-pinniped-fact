@@ -69,7 +69,6 @@ jobs:
             --zone=${{ env.VM_ZONE }} \
             --project=${{ env.PROJECT_ID }} \
             --tunnel-through-iap \
-            --internal-ip \
             --quiet
           
           # SSH into the VM, unpack the files into Nginx, and clean up
@@ -77,7 +76,6 @@ jobs:
             --zone=${{ env.VM_ZONE }} \
             --project=${{ env.PROJECT_ID }} \
             --tunnel-through-iap \
-            --internal-ip \
             --quiet \
             --command="
               sudo tar -xzf /tmp/frontend.tar.gz -C /var/www/html/
