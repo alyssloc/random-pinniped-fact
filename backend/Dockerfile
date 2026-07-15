@@ -6,7 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 #3- setting working directory
-WORKDIR /src
+WORKDIR /app
 
 #4- installing compilation tools and dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -18,16 +18,16 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 #6- copy application code
-COPY . .
+COPY src/ .
 
 #6- data directory
-RUN mkdir -p /src/src/instance/pinniped_facts
+RUN mkdir -p /app/instance/pinniped_facts
 
 #7- creating user to run the app
 RUN useradd -m appuser
-RUN chown -R appuser:appuser /src
+RUN chown -R appuser:appuser /app
 USER appuser
 
 #8- running application
-CMD exec gunicorn --chdir src --bind 0.0.0.0:$PORT "app:app"
+CMD exec gunicorn  --bind 0.0.0.0:$PORT "app:app"
 
