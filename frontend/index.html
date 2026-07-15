@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Daily Seal Fact</title>
+    <title> Random Pinniped Fact</title>
 </head>
 <body>
     <h1>Pinniped Fact</h1>
     <p id="fact">Loading fact...</p>
-    <img id="seal-image" src="" alt="Seal Image" style="max-width:500px; display:none;">
+    <img id="pinniped-image" src="" alt="Pinniped Image" style="max-width:500px; display:none;">
 
     <script>
         const API_URL = "/api/fact/random";
@@ -17,13 +17,13 @@
             .then(response => {
                 if(response.status === "success") {
                     document.getElementById('fact').innerText = response.data.fact;
-                    const img = document.getElementById('seal-image');
+                    const img = document.getElementById('pinniped-image');
                     img.src = response.data.image_url;
                     img.style.display = "block";
                 }
             })
             .catch(err => {
-                document.getElementById('fact').innerText = "Failed to load seal fact.";
+                document.getElementById('fact').innerText = "Failed to load pinniped fact.";
                 console.error(err);
             });
     </script>
