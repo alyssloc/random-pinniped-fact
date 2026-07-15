@@ -14,3 +14,10 @@ variable "app_name" {
   type        = string
   default     = "pinniped-fact-api"
 }
+
+variable "vm_service_account" {
+  type        = string
+  description = "Service account for VM"
+  default     = "vm_service_account"
+}
+
