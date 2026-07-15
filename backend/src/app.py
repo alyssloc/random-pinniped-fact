@@ -41,14 +41,14 @@ def random_fact():
 
    
    fact_data = random_fact.to_dict() 
-   base_url = request.host_url.rstrip('/')
+   #base_url = request.host_url.rstrip('/')
 
-   if base_url.startswith("http://"):
-    base_url = base_url.replace("http://", "https://", 1)
+   #if base_url.startswith("http://"):
+    #base_url = base_url.replace("http://", "https://", 1)
 
    #in db, image url is just the {seal name} part, appending path and file type
    seal_name = fact_data['image_url']
-   fact_data['image_url'] = f"{base_url}/static/{seal_name}.jpg"
+   fact_data['image_url'] = f"api/static/{seal_name}.jpg"
     
    return jsonify({
       "status": "success",
