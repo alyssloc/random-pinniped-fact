@@ -33,7 +33,7 @@ on:
     branches:
       - 'main'
     paths:
-      - 'frontend/**'
+      - 'frontend/index.html'
 
 
 env:
@@ -75,6 +75,7 @@ jobs:
           gcloud compute ssh ${{ env.VM_NAME }} \
             --zone=${{ env.VM_ZONE }} \
             --project=${{ env.PROJECT_ID }} \
+            --tunnel-through-iap \
             --quiet \
             --command="
               sudo tar -xzf /tmp/frontend.tar.gz -C /var/www/html/
