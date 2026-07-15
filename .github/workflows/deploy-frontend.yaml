@@ -33,7 +33,7 @@ on:
     branches:
       - 'main'
     paths:
-      - 'frontend/index.html'
+      - 'frontend/**'
 
 
 env:
