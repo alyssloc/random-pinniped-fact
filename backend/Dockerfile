@@ -23,11 +23,15 @@ COPY src/ .
 #6- data directory
 RUN mkdir -p /app/instance/pinniped_facts
 
-#7- creating user to run the app
+#7- seeding db
+RUN python -m flask init-db
+RUN python -m flask seed-db
+
+#8- creating user to run the app
 RUN useradd -m appuser
 RUN chown -R appuser:appuser /app
 USER appuser
 
-#8- running application
+#9- running application
 CMD exec gunicorn  --bind 0.0.0.0:$PORT "app:app"
 
